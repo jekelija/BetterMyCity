@@ -2,6 +2,7 @@
 <html ng-app="app">
 <head>
   <title>Better My City</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
 
@@ -11,7 +12,8 @@
 <!-- Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap.min.js"></script>
+                                                                                                   
 <!-- Template -->
 <script type="text/ng-template" id="/todos.html">
   Search: <input type="text" ng-model="search.name">
@@ -30,7 +32,7 @@
 </script>
 
 <script>
-  angular.module('app', ['ngRoute'])
+  angular.module('app', ['ngRoute', 'ui.bootstrap'])
 
     //---------------
     // Services

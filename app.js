@@ -5,14 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -20,12 +17,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(require('node-sass-middleware')({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-  indentedSyntax: true,
-  sourceMap: true
-}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 var mongoose = require('mongoose');
@@ -37,6 +28,9 @@ mongoose.connect('mongodb://localhost/BetterMyCity', function(err) {
     }
 });
 
+var routes = require('./routes/index');
+//TODO remove users or change it to orgs or something
+var users = require('./routes/users');
 app.use('/', routes);
 app.use('/users', users);
 

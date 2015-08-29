@@ -2,6 +2,9 @@
 logs
 *.log
 
+# binaries
+bin
+
 # Runtime data
 pids
 *.pid
