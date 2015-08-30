@@ -3,18 +3,77 @@
 <head>
   <title>Better My City</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+    
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">Better My City</a>
+        </div>
 
-<!--not entirely sure why this is needed, but if i get rid of it, then nothing shows up on screen-->
-<ng-view></ng-view>
-
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden">
+                    <a href="#page-top"></a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#services">Services</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#portfolio">Portfolio</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#about">About</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#team">Team</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+    
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="intro-text">
+            <div class="intro-lead-in">Welcome To Our Better My City!</div>
+<!--            <div class="intro-heading">It's Nice To Meet You</div>-->
+            <a href="#services" class="page-scroll btn btn-xl">Tell Me More</a>
+        </div>
+    </div>
+</header>
+    
+<!--ng-view needed for where the templates go if i decide to use the router...-->
+<!--<ng-view></ng-view>-->
+    
 <!-- Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap.min.js"></script>
-                                                                                                   
+    
+<script>
+  angular.module('app', [/*'ngRoute', */'ui.bootstrap']);
+</script>                                                                                   
 <!-- Template -->
+    
+<!--
 <script type="text/ng-template" id="/todos.html">
   Search: <input type="text" ng-model="search.name">
   <ul>
@@ -80,7 +139,9 @@
           controller: 'TodoDetailCtrl'
        });
     }]);
+
 </script>
+-->
 
 </body>
 </html>
