@@ -32,7 +32,7 @@
                 <li class="hidden" du-smooth-scroll="page-top" du-scrollspy>
                     <a></a>
                 </li>
-                <li du-smooth-scroll="what-we-do" du-scrollspy>
+                <li du-smooth-scroll="who-we-are" du-scrollspy>
                     <a>What We Do</a>
                 </li>
                 <li du-smooth-scroll="find-my-city" du-scrollspy>
@@ -60,144 +60,80 @@
         <div class="intro-text">
 <!--            <div class="intro-heading">Welcome To Better My City!</div>-->
             <div class="intro-lead-in">Seeking to make a positive impact on the neighborhoods around us</div>
-            <a du-smooth-scroll="what-we-do" class="btn btn-xl">Tell Me More</a>
+            <a du-smooth-scroll="who-we-are" class="btn btn-xl">Tell Me More</a>
         </div>
     </div>
 </header>
     
 <!-- What We Do Section -->
-<section id="what-we-do">
+<section id="who-we-are">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">What We Do</h2>
-                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                <h2 class="section-heading">Who We Are</h2>
+                <h3 class="text-muted">Jeremiah 29:7</h3>
+                <h3 class="section-subheading text-muted">
+                But seek the welfare of the city where I have sent you into exile, and pray to the LORD on its behalf, for in its welfare you will find your welfare.
+                </h3>
             </div>
         </div>
         <div class="row text-center">
-            <div class="col-md-4">
-                <span class="fa-stack fa-4x">
-                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                    <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                </span>
-                <h4 class="service-heading">E-Commerce</h4>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+            <div class="col-md-6">
+                <img src="img/bible.png"/>
+                <h4 class="service-heading">Gospel-Centered Change</h4>
+                <p class="text-muted">We believe God placed us in the cities we live in for a purpose. Although we believe in a future glory that far outstrips this current world, we do not believe we are meant to neglect the welfare of this world. We believe we are meant to be positive agents of change in this world.</p>
             </div>
-            <div class="col-md-4">
-                <span class="fa-stack fa-4x">
-                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                    <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
-                </span>
-                <h4 class="service-heading">Responsive Design</h4>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-            </div>
-            <div class="col-md-4">
-                <span class="fa-stack fa-4x">
-                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                    <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                </span>
-                <h4 class="service-heading">Web Security</h4>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+            <div class="col-md-6">
+                <img src="img/connecting.png"/>
+                <h4 class="service-heading">Connecting People</h4>
+                <p class="text-muted">We believe there are many in the community who also desire to be positive agents of change. However, often times those with the means to give are unaware of local causes that they believe in. We hope to connect philanthropic-minded organizations with local charities and causes to promote the well-being of cities.</p>
             </div>
         </div>
     </div>
 </section>
     
-<!-- Portfolio Grid Section -->
+<!-- City Grid Section -->
 <section id="find-my-city" class="bg-light-gray">
-    <div class="container">
+    <div class="container" ng-controller="CityController">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading">Find My City</h2>
-                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                <h3 class="section-subheading text-muted">Search: <input type="text" ng-model="search.name">
+                </h3>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4 col-sm-6 portfolio-item">
-                <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
+            <div class="col-md-4 col-sm-6 city-item" ng-repeat="city in cities | filter: search">
+                <a href="#portfolioModal1" class="city-link" data-toggle="modal">
+                    <div class="city-hover">
+                        <div class="city-hover-content">
                             <i class="fa fa-plus fa-3x"></i>
                         </div>
                     </div>
-<!--                    <img src="img/portfolio/roundicons.png" class="img-responsive" alt="">-->
+                    <img ng-src="img/cities/{{city.image}}" class="img-responsive" alt="">
                 </a>
-                <div class="portfolio-caption">
-                    <h4>Round Icons</h4>
-                    <p class="text-muted">Graphic Design</p>
+                <div class="city-caption">
+                    <h4>{{city.name}}</h4>
+                    <p class="text-muted">Organizations:</p>
+                    <p class="text-muted">Causes:</p>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-                <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
+            <div class="col-md-4 col-sm-6 city-item">
+                <a href="#addCityRequest" class="city-link" data-toggle="modal">
+                    <div class="city-hover">
+                        <div class="city-hover-content">
                             <i class="fa fa-plus fa-3x"></i>
                         </div>
                     </div>
-<!--                    <img src="img/portfolio/startup-framework.png" class="img-responsive" alt="">-->
+                    <img ng-src="img/cities/default_city_image.jpg" class="img-responsive" alt="">
                 </a>
-                <div class="portfolio-caption">
-                    <h4>Startup Framework</h4>
-                    <p class="text-muted">Website Design</p>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-                <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-<!--                    <img src="img/portfolio/treehouse.png" class="img-responsive" alt="">-->
-                </a>
-                <div class="portfolio-caption">
-                    <h4>Treehouse</h4>
-                    <p class="text-muted">Website Design</p>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-                <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-<!--                    <img src="img/portfolio/golden.png" class="img-responsive" alt="">-->
-                </a>
-                <div class="portfolio-caption">
-                    <h4>Golden</h4>
-                    <p class="text-muted">Website Design</p>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-                <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-<!--                    <img src="img/portfolio/escape.png" class="img-responsive" alt="">-->
-                </a>
-                <div class="portfolio-caption">
-                    <h4>Escape</h4>
-                    <p class="text-muted">Website Design</p>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 portfolio-item">
-                <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                    <div class="portfolio-hover">
-                        <div class="portfolio-hover-content">
-                            <i class="fa fa-plus fa-3x"></i>
-                        </div>
-                    </div>
-<!--                    <img src="img/portfolio/dreams.png" class="img-responsive" alt="">-->
-                </a>
-                <div class="portfolio-caption">
-                    <h4>Dreams</h4>
-                    <p class="text-muted">Website Design</p>
+                <div class="city-caption">
+                    <h4>Don't See Your City?</h4>
+                    <p class="text-muted">Click the image to start a movement in your city</p>
                 </div>
             </div>
         </div>
+        
     </div>
 </section>
     
@@ -213,15 +149,32 @@
 <script src="js/cbpAnimatedHeader.min.js"></script>
     
 <script>
-  angular.module('app', [/*'ngRoute', */'ui.bootstrap', 'duScroll'])
-      .controller('AppMainCntrl', function($scope, $document){
-        $scope.toTheTop = function() {
-            $document.scrollTopAnimated(0, 5000).then(function() {
-              //intentionally blank
-            });
-        }
-      }
-    ).value('duScrollOffset', 30);
+angular.module('app', [/*'ngRoute', */'ui.bootstrap', 'duScroll'])
+    // Service to retrieve cities
+    .factory('cities', ['$http', function($http){
+      return $http.get('/cities');
+    }])
+    //include that factory in the scope of the main controller
+    .controller('CityController', ['$scope', 'cities', function($scope, cities){
+
+        //attempt to retrieve the current cities from the DB
+        cities.success(function(data){
+            console.log(data);
+            $scope.cities = data;
+        }).error(function(data, status){
+            console.log(data, status);
+            $scope.cities = [];
+        });
+        
+        //TODO move this to another controlller
+//        //function to scroll to top
+//        $scope.toTheTop = function() {
+//            $document.scrollTopAnimated(0, 5000).then(function() {
+//                //intentionally blank
+//            });
+//        }
+    }])
+    .value('duScrollOffset', 30);
 </script>                                                                                   
 <!-- Template -->
     

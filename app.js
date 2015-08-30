@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/BetterMyCity', function(err) {
+var connection = mongoose.connect('mongodb://localhost/BetterMyCity', function(err) {
     if(err) {
         console.log('connection to mongodb error', err);
     } else {
