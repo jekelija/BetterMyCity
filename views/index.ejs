@@ -1,11 +1,14 @@
 <!-- for hooking this up to back end nodejs and mongo: http://adrianmejia.com/blog/2014/10/03/mean-stack-tutorial-mongodb-expressjs-angularjs-nodejs/ -->
 <html ng-app="app">
 <head>
-  <title>Better My City</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Better My City</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
+<body id="page-top" class="index">
     
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -18,29 +21,31 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand page-scroll" href="#page-top">Better My City</a>
+            <a class="navbar-brand" du-smooth-scroll="page-top" du-scroll-spy>Better My City</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li class="hidden">
-                    <a href="#page-top"></a>
+                <!-- smooth-scroll and scroll-spy must be on li tag, not a tag, in order for 
+                    scroll-spy to work properly with css elements -->
+                <li class="hidden" du-smooth-scroll="page-top" du-scrollspy>
+                    <a></a>
                 </li>
-                <li>
-                    <a class="page-scroll" href="#services">Services</a>
+                <li du-smooth-scroll="what-we-do" du-scrollspy>
+                    <a>What We Do</a>
                 </li>
-                <li>
-                    <a class="page-scroll" href="#portfolio">Portfolio</a>
+                <li du-smooth-scroll="find-my-city" du-scrollspy>
+                    <a>Find My City</a>
                 </li>
-                <li>
-                    <a class="page-scroll" href="#about">About</a>
+                <li du-smooth-scroll="organizations" du-scrollspy>
+                    <a>Participating Organizations</a>
                 </li>
-                <li>
-                    <a class="page-scroll" href="#team">Team</a>
+                <li du-smooth-scroll="causes" du-scrollspy>
+                    <a>Causes</a>
                 </li>
-                <li>
-                    <a class="page-scroll" href="#contact">Contact</a>
+                <li du-smooth-scroll="contact" du-scrollspy>
+                    <a>Contact</a>
                 </li>
             </ul>
         </div>
@@ -53,12 +58,148 @@
 <header>
     <div class="container">
         <div class="intro-text">
-            <div class="intro-lead-in">Welcome To Our Better My City!</div>
-<!--            <div class="intro-heading">It's Nice To Meet You</div>-->
-            <a href="#services" class="page-scroll btn btn-xl">Tell Me More</a>
+<!--            <div class="intro-heading">Welcome To Better My City!</div>-->
+            <div class="intro-lead-in">Seeking to make a positive impact on the neighborhoods around us</div>
+            <a du-smooth-scroll="what-we-do" class="btn btn-xl">Tell Me More</a>
         </div>
     </div>
 </header>
+    
+<!-- What We Do Section -->
+<section id="what-we-do">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">What We Do</h2>
+                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">E-Commerce</h4>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+            </div>
+            <div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">Responsive Design</h4>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+            </div>
+            <div class="col-md-4">
+                <span class="fa-stack fa-4x">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                </span>
+                <h4 class="service-heading">Web Security</h4>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+            </div>
+        </div>
+    </div>
+</section>
+    
+<!-- Portfolio Grid Section -->
+<section id="find-my-city" class="bg-light-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Find My City</h2>
+                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+<!--                    <img src="img/portfolio/roundicons.png" class="img-responsive" alt="">-->
+                </a>
+                <div class="portfolio-caption">
+                    <h4>Round Icons</h4>
+                    <p class="text-muted">Graphic Design</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+<!--                    <img src="img/portfolio/startup-framework.png" class="img-responsive" alt="">-->
+                </a>
+                <div class="portfolio-caption">
+                    <h4>Startup Framework</h4>
+                    <p class="text-muted">Website Design</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+<!--                    <img src="img/portfolio/treehouse.png" class="img-responsive" alt="">-->
+                </a>
+                <div class="portfolio-caption">
+                    <h4>Treehouse</h4>
+                    <p class="text-muted">Website Design</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+<!--                    <img src="img/portfolio/golden.png" class="img-responsive" alt="">-->
+                </a>
+                <div class="portfolio-caption">
+                    <h4>Golden</h4>
+                    <p class="text-muted">Website Design</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+<!--                    <img src="img/portfolio/escape.png" class="img-responsive" alt="">-->
+                </a>
+                <div class="portfolio-caption">
+                    <h4>Escape</h4>
+                    <p class="text-muted">Website Design</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+<!--                    <img src="img/portfolio/dreams.png" class="img-responsive" alt="">-->
+                </a>
+                <div class="portfolio-caption">
+                    <h4>Dreams</h4>
+                    <p class="text-muted">Website Design</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
     
 <!--ng-view needed for where the templates go if i decide to use the router...-->
 <!--<ng-view></ng-view>-->
@@ -67,9 +208,20 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
 <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-scroll/0.7.2/angular-scroll.js"></script>
+<script src="js/classie.js"></script>
+<script src="js/cbpAnimatedHeader.min.js"></script>
     
 <script>
-  angular.module('app', [/*'ngRoute', */'ui.bootstrap']);
+  angular.module('app', [/*'ngRoute', */'ui.bootstrap', 'duScroll'])
+      .controller('AppMainCntrl', function($scope, $document){
+        $scope.toTheTop = function() {
+            $document.scrollTopAnimated(0, 5000).then(function() {
+              //intentionally blank
+            });
+        }
+      }
+    ).value('duScrollOffset', 30);
 </script>                                                                                   
 <!-- Template -->
     
