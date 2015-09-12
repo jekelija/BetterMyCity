@@ -12,7 +12,9 @@ var CitySchema = new mongoose.Schema({
     admin: String,
     adminPhone: String,
     adminEmail: String,
-    updated_at: { type: Date, default: Date.now }
+    updated_at: { type: Date, default: Date.now },
+    organizations: Array,
+    causes: Array
 });
 
 module.exports = mongoose.model('City', CitySchema);
