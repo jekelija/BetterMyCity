@@ -1,0 +1,58 @@
+<!-- for hooking this up to back end nodejs and mongo: http://adrianmejia.com/blog/2014/10/03/mean-stack-tutorial-mongodb-expressjs-angularjs-nodejs/ -->
+<html ng-app="about">
+<head>
+    <% include ../partials/head %>
+    
+    <title>Who We Are</title>
+
+</head>
+<body id="page-top" class="index">
+    
+<!-- Navigation -->
+<% include ../partials/nav %>
+<% include ../partials/navbar-animated %>
+
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="intro-text">
+<!--            <div class="intro-heading">Welcome To Better My City!</div>-->
+            <div class="intro-lead-in">About Us</div>
+            <a du-smooth-scroll="faq" class="btn btn-xl">FAQ</a>
+        </div>
+    </div>
+</header>
+    
+<!-- What We Do Section -->
+<section id="faq">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">What We're Attempting</h2>
+                <h3 class="text-muted">Jeremiah 29:7</h3>
+                <h3 class="section-subheading text-muted">
+                But seek the welfare of the city where I have sent you into exile, and pray to the LORD on its behalf, for in its welfare you will find your welfare.
+                </h3>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-6">
+                <img src="img/bible.png"/>
+                <h4 class="service-heading">Gospel-Centered Change</h4>
+                <p class="text-muted">We believe God placed us in the cities we live in for a purpose. Although we believe in a future glory that far outstrips this current world, we do not believe we are meant to neglect the welfare of this world. We believe we are meant to be positive agents of change in this world.</p>
+            </div>
+            <div class="col-md-6">
+                <img src="img/connecting.png"/>
+                <h4 class="service-heading">Connecting People</h4>
+                <p class="text-muted">We believe there are many in the community who also desire to be positive agents of change. However, often times those with the means to give are unaware of local causes that they believe in. We hope to connect philanthropic-minded organizations with local charities and causes to promote the well-being of cities.</p>
+            </div>
+        </div>
+    </div>
+</section>
+   
+<script>
+angular.module('about', [/*'ngRoute', */'ui.bootstrap', 'duScroll'])    
+</script>
+    
+</body>
+</html>
