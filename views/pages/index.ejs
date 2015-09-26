@@ -53,20 +53,6 @@
 <!--ng-view needed for where the templates go if i decide to use the router...-->
 <!--<ng-view></ng-view>-->
 
-<script>
-angular.module('app', [/*'ngRoute', */'ui.bootstrap', 'duScroll'])
-    //include that factory in the scope of the main controller
-    .controller('IndexController', ['$scope', function($scope){
-        
-        //function to scroll to top
-        $scope.toTheTop = function() {
-            $document.scrollTopAnimated(0, 5000).then(function() {
-                //intentionally blank
-            });
-        }
-    }])
-    .value('duScrollOffset', 30);
-</script>                                                                                   
 <!-- Template -->
     
 <!--

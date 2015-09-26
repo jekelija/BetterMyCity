@@ -1,5 +1,5 @@
 <!-- for hooking this up to back end nodejs and mongo: http://adrianmejia.com/blog/2014/10/03/mean-stack-tutorial-mongodb-expressjs-angularjs-nodejs/ -->
-<html ng-app="city">
+<html ng-app="app">
 <head>
     <% include ../partials/head %>
     
@@ -72,43 +72,6 @@
         </div>
     </script>
     
-    <script src="js/ngDialog.min.js"></script>
-    <script>
-    angular.module('city', [/*'ngRoute', */'ui.bootstrap', 'duScroll', 'ngDialog'])
-        // Service to retrieve cities
-        .factory('cities', ['$http', function($http){
-          return $http.get('/cities');
-        }])
-        //include that factory in the scope of the main controller
-        .controller('CityController', ['$scope', 'cities', 'ngDialog', function($scope, cities, ngDialog){
-
-            //attempt to retrieve the current cities from the DB
-            cities.success(function(data){
-                console.log(data);
-                $scope.cities = data;
-            }).error(function(data, status){
-                console.log(data, status);
-                $scope.cities = [];
-            });
-            
-            $scope.openCity = function(city) {
-                ngDialog.open({
-                    template: 'cityDialog',
-                    //controller: 'CityDialogController',
-                    className: 'ngdialog-theme-default',
-                    data:city
-                });
-            };
-            
-            $scope.openAddCity = function() {
-                ngDialog.open({
-                    template: 'addCityDialog',
-                    //controller: 'CityDialogController',
-                    className: 'ngdialog-theme-default'
-                });
-            };
-        }])
-        .value('duScrollOffset', 30);
-    </script>  
+    <script src="js/controllers/cityController.js"></script>
 </body>
 </html>
