@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var config = require('./config'); // get our config file
+
 var app = express();
 
 // view engine setup
@@ -20,7 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var mongoose = require('mongoose');
-var connection = mongoose.connect('mongodb://localhost/BetterMyCity', function(err) {
+var connection = mongoose.connect(config.database, function(err) {
     if(err) {
         console.log('connection to mongodb error', err);
     } else {
@@ -28,8 +30,16 @@ var connection = mongoose.connect('mongodb://localhost/BetterMyCity', function(e
     }
 });
 
+app.set('tokenSecret', config.secret); // secret variable to use for tokens
+
 var routes = require('./routes/index');
 app.use('/', routes);
+
+var cityRoutes = require('./routes/cities');
+app.use('/cities', cityRoutes);
+
+var userRoutes = require('./routes/user');
+app.use('/users', userRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

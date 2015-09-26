@@ -26,16 +26,4 @@ router.get('/contact', function(req, res, next) {
   res.render('pages/contact');
 });
 
-//CRUD below
-/* GET available cities */
-var cities = require('../models/City.js');
-router.get('/cities', function(req, res, next) {
-  cities.find(function (err, result) {
-      if (err) {
-          return next(err);
-      }
-      res.json(result);
-  });
-});
-
 module.exports = router;
