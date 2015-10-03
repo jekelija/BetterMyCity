@@ -27,10 +27,10 @@ app.controller('LoginController', ['$scope', 'ngDialog', 'AuthenticationService'
     $scope.login = function() {
         $scope.dataLoading = true;
         AuthenticationService.Login($scope.username, $scope.password, function (response) {
-            if (response.success) {
+            if (response.data.success) {
                 AuthenticationService.SetCredentials($scope.username, $scope.password);
             } else {
-                FlashService.Error(response.message);
+                FlashService.Error(response.data.message);
                 $scope.dataLoading = false;
             }
         });
@@ -49,16 +49,16 @@ function($scope, ngDialog, UserService, FlashService) {
     
     $scope.register = function() {
         $scope.dataLoading = true;
-        UserService.Create($scope.user)
-            .then(function (response) {
-                if (response.success) {
-                    FlashService.Success('Registration successful', true);
-                    openLogin(ngDialog);
-                } else {
-                    FlashService.Error(response.message);
-                    $scope.dataLoading = false;
-                }
-            });
+        UserService.create($scope.user, function(response){
+            if (response.data.success) {
+                FlashService.Success('Registration successful', true);
+                openLogin(ngDialog);
+            } else {
+                console.log(response.data.message);
+                FlashService.Error(response.data.message);
+                $scope.dataLoading = false;
+            }
+        });
     }
     
     $scope.switchToRegister = function () {
@@ -68,7 +68,7 @@ function($scope, ngDialog, UserService, FlashService) {
 }]);
 
 //NavBar Controller-----------------------------------------------------------------------------
-app.controller('NavbarController', ['$scope', 'ngDialog', function($scope, ngDialog){
+app.controller('NavbarController', ['$scope', '$timeout', 'ngDialog', function($scope, $timeout, ngDialog){
     $scope.openRegister = function() {
         openRegister(ngDialog);
     };

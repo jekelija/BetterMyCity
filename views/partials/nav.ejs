@@ -71,6 +71,7 @@
     <script type="text/ng-template" id="registerDialog">
         <div class="ngdialog-message">
             <h2>Register</h2>
+            <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
             <form name="form" ng-submit="register()" role="form">
                 <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
                     <label for="username">First name</label>

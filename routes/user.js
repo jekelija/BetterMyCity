@@ -38,6 +38,14 @@ router.post('/authenticate', function(req, res) {
     });
 }); 
 
+// route to show all users
+router.post('/', function(req, res) {
+    console.log(req.body);
+    res.json({
+        success: false,
+        message: 'Cannot register yet, not implemented server side yet'
+    });
+});
 
 // route middleware to verify a token
 // order is important; by placing it here, the authenticate method above does NOT use

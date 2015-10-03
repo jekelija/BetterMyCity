@@ -18,9 +18,11 @@
         function Login(username, password, callback) {
             /* Authenticate with server TODO password should not be plain text */
             $http.post('/users/authenticate', { username: username, password: password })
-                .success(function (response) {
+                .then(function successCallback(response) {
                     callback(response);
-                });
+                  }, function errorCallback(response) {
+                    callback(response);
+                  });
         }
 
         function SetCredentials(username, password) {
