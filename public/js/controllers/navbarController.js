@@ -1,7 +1,7 @@
 //declare open register/login function outside of cntrl's so we can re-use it
 function openRegister(ngDialog) {
     ngDialog.open({
-        template: 'registerDialog',
+        template: 'dialogs/registerDialog.html',
         controller: 'RegisterController',
         className: 'ngdialog-theme-default'
     });
@@ -9,7 +9,7 @@ function openRegister(ngDialog) {
 
 function openLogin(ngDialog) {
     ngDialog.open({
-        template: 'loginDialog',
+        template: 'dialogs/loginDialog.html',
         controller: 'LoginController',
         className: 'ngdialog-theme-default'
     });
@@ -19,16 +19,14 @@ function openLogin(ngDialog) {
 app.controller('LoginController', ['$scope', 'ngDialog', 'AuthenticationService', 'FlashService', function($scope, ngDialog, AuthenticationService, FlashService){
     (function initController() {
         $scope.dataLoading = false;
-
-        // reset login status
-        AuthenticationService.ClearCredentials();
     })();
     
     $scope.login = function() {
         $scope.dataLoading = true;
         AuthenticationService.Login($scope.username, $scope.password, function (response) {
             if (response.data.success) {
-                AuthenticationService.SetCredentials($scope.username, $scope.password);
+                $scope.dataLoading = false;
+                FlashService.Success('Login successful', true);
             } else {
                 FlashService.Error(response.data.message);
                 $scope.dataLoading = false;
@@ -51,8 +49,8 @@ function($scope, ngDialog, UserService, FlashService) {
         $scope.dataLoading = true;
         UserService.create($scope.user, function(response){
             if (response.data.success) {
+                $scope.dataLoading = false;
                 FlashService.Success('Registration successful', true);
-                openLogin(ngDialog);
             } else {
                 console.log(response.data.message);
                 FlashService.Error(response.data.message);

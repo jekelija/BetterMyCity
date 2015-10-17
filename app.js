@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var config = require('./config'); // get our config file
 
-var app = express();
+var app = module.exports = express(); //now app.js can be required to bring app into any file
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

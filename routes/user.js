@@ -1,16 +1,17 @@
 /** All of the API routes for creating and modifying users/organiations */
 var express = require('express');
 var router = express.Router();
+var app = require('../app');
 
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
-var users = require('../models/User.js');
+var User = require('../models/User.js');
 
 // route to authenticate a user
 router.post('/authenticate', function(req, res) {
     // find the user
-    users.findOne({
-        name: req.body.username
+    User.findOne({
+        username: req.body.username
     }, function(err, user) {
         if (err) throw err;
         if (!user) {
@@ -20,13 +21,12 @@ router.post('/authenticate', function(req, res) {
             if (user.password != req.body.password) {
                 res.json({ success: false, message: 'Authentication failed. Username/password mismatch.' });
             } else {
-
                 // if user is found and password is right
                 // create a token
                 var token = jwt.sign(user, app.get('tokenSecret'), {
                     expiresInMinutes: 1440 // expires in 24 hours
                 });
-
+                
                 // return the information including token as JSON
                 res.json({
                     success: true,
@@ -40,11 +40,38 @@ router.post('/authenticate', function(req, res) {
 
 // route to show all users
 router.post('/', function(req, res) {
-    console.log(req.body);
-    res.json({
-        success: false,
-        message: 'Cannot register yet, not implemented server side yet'
-    });
+    console.log('Adding ' + req.body);
+    var user = new User(
+        {
+            username: req.body.username,
+            password: req.body.password,
+            salt: String,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName, 
+            email: req.body.email,
+            phone: '',
+            address: '',
+            cities: [],
+            privacyOptions: '' 
+        }
+    );
+   
+    //save actually places it in DB
+    user.save(function (err) {
+        if (err) {
+            res.json({
+                success: false,
+                message: 'Cannot save user ' + req.body.username + ' to database... dont know why yet!'
+            });
+        }
+        else {
+            res.json({
+                success: true,
+                message: 'Successfully registered ' + req.body.username + '; please log in!'
+            });
+        }
+    })
+    
 });
 
 // route middleware to verify a token
