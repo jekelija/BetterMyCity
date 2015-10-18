@@ -26,4 +26,9 @@ router.get('/contact', function(req, res, next) {
   res.render('pages/contact');
 });
 
+/* GET portal page. */
+router.get('/portal', function(req, res, next) {
+  res.render('pages/portal');
+});
+
 module.exports = router;

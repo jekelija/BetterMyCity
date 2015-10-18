@@ -1,12 +1,12 @@
 // Service to retrieve cities
-app.factory('cities', ['$http', function($http){
+app.factory('CityFactory', ['$http', function($http){
   return $http.get('/cities');
 }]);
 //include that factory in the scope of the main controller
-app.controller('CityController', ['$scope', 'cities', 'ngDialog', function($scope, cities, ngDialog){
+app.controller('CityController', ['$scope', 'CityFactory', 'ngDialog', function($scope, CityFactory, ngDialog){
 
     //attempt to retrieve the current cities from the DB
-    cities.success(function(data){
+    CityFactory.success(function(data){
         console.log(data);
         $scope.cities = data;
     }).error(function(data, status){

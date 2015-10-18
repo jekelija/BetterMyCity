@@ -38,7 +38,7 @@ router.post('/authenticate', function(req, res) {
     });
 }); 
 
-// route to show all users
+// route to create a user
 router.post('/', function(req, res) {
     console.log('Adding ' + req.body);
     var user = new User(
@@ -105,10 +105,16 @@ router.use(function(req, res, next) {
     }
 });
 
-// route to show all users
-router.get('/', function(req, res) {
-    users.find({}, function(err, users) {
-        res.json(users);
+// route to get user information
+router.get('/:uname', function(req, res) {
+    users.find({username:uname}, function(err, user) {
+        if (err) {
+            return res.json({ success: false, message: 'Failed to authenticate token.' });    
+        }
+        else {
+            //send user along
+            return res.json({ success: false, user:user });    
+        }
     });
 });
 

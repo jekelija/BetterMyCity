@@ -16,7 +16,7 @@ function openLogin(ngDialog) {
 }
 
 //Login Controller-----------------------------------------------------------------------------
-app.controller('LoginController', ['$scope', 'ngDialog', 'AuthenticationService', 'FlashService', function($scope, ngDialog, AuthenticationService, FlashService){
+app.controller('LoginController', function($scope, $window, $location, $timeout, ngDialog, AuthenticationService, FlashService){
     (function initController() {
         $scope.dataLoading = false;
     })();
@@ -26,7 +26,12 @@ app.controller('LoginController', ['$scope', 'ngDialog', 'AuthenticationService'
         AuthenticationService.Login($scope.username, $scope.password, function (response) {
             if (response.data.success) {
                 $scope.dataLoading = false;
-                FlashService.Success('Login successful', true);
+                //store our jwt token in local storage
+                $window.localStorage['token'] = response.data.token;
+                FlashService.Success('Login successful... Redirecting now', true);
+                $timeout(function() {
+                    $location.url('portal');
+                }, 1000);
             } else {
                 FlashService.Error(response.data.message);
                 $scope.dataLoading = false;
@@ -38,7 +43,7 @@ app.controller('LoginController', ['$scope', 'ngDialog', 'AuthenticationService'
         ngDialog.close('loginDialog');
         openRegister(ngDialog);
     };
-}]);  
+});  
 
 //Register Controller-----------------------------------------------------------------------------
 app.controller('RegisterController', ['$scope', 'ngDialog', 'UserService', 'FlashService',
