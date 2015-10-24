@@ -1,0 +1,45 @@
+
+<!-- City Grid Section -->
+<section id="find-my-city" class="bg-light-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Find My City</h2>
+                <h3 class="section-subheading text-muted">Search: <input type="text" ng-model="search.name">
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 city-item" ng-repeat="city in cities | filter: search">
+                <a ng-click="openCity(city)" class="city-link">
+                    <div class="city-hover">
+                        <div class="city-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img ng-src="img/cities/{{city.image}}" class="img-responsive" alt="">
+                </a>
+                <div class="city-caption">
+                    <h4>{{city.name}}</h4>
+                    <p class="text-muted">Organizations: {{city.organizations.length}}</p>
+                    <p class="text-muted">Causes: {{city.causes.length}}</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 city-item">
+                <a ng-click="openAddCity()" class="city-link" data-toggle="modal">
+                    <div class="city-hover">
+                        <div class="city-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img ng-src="img/cities/default_city_image.jpg" class="img-responsive" alt="">
+                </a>
+                <div class="city-caption">
+                    <h4>Don't See Your City?</h4>
+                    <p class="text-muted">Click the image to start a movement in your city</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

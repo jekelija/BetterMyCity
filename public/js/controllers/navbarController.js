@@ -28,9 +28,12 @@ app.controller('LoginController', function($scope, $window, $location, $timeout,
                 $scope.dataLoading = false;
                 //store our jwt token in local storage
                 $window.localStorage['token'] = response.data.token;
+                $window.localStorage['username'] = $scope.username;
                 FlashService.Success('Login successful... Redirecting now', true);
                 $timeout(function() {
-                    $location.url('portal');
+                    FlashService.clearFlashMessage();
+                    ngDialog.close();
+                    $location.url('portal/' + $scope.username);
                 }, 1000);
             } else {
                 FlashService.Error(response.data.message);
@@ -40,7 +43,7 @@ app.controller('LoginController', function($scope, $window, $location, $timeout,
     };
     
     $scope.switchToRegister = function () {
-        ngDialog.close('loginDialog');
+        ngDialog.close();
         openRegister(ngDialog);
     };
 });  
@@ -64,8 +67,8 @@ function($scope, ngDialog, UserService, FlashService) {
         });
     }
     
-    $scope.switchToRegister = function () {
-        ngDialog.close('registerDialog');
+    $scope.switchToLogin = function () {
+        ngDialog.close();
         openLogin(ngDialog);
     };
 }]);

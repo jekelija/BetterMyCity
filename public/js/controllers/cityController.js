@@ -1,3 +1,5 @@
+
+
 // Service to retrieve cities
 app.factory('CityFactory', ['$http', function($http){
   return $http.get('/cities');
@@ -16,8 +18,7 @@ app.controller('CityController', ['$scope', 'CityFactory', 'ngDialog', function(
 
     $scope.openCity = function(city) {
         ngDialog.open({
-            template: 'cityDialog',
-            //controller: 'CityDialogController',
+            template: 'dialogs/cityDialog.html',
             className: 'ngdialog-theme-default',
             data:city
         });
@@ -25,8 +26,7 @@ app.controller('CityController', ['$scope', 'CityFactory', 'ngDialog', function(
 
     $scope.openAddCity = function() {
         ngDialog.open({
-            template: 'addCityDialog',
-            //controller: 'CityDialogController',
+            template: 'dialogs/addCityDialog.html',
             className: 'ngdialog-theme-default'
         });
     };

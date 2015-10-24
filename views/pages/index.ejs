@@ -1,129 +1,84 @@
 <!-- for hooking this up to back end nodejs and mongo: http://adrianmejia.com/blog/2014/10/03/mean-stack-tutorial-mongodb-expressjs-angularjs-nodejs/ -->
 <html ng-app="app">
 <head>
-    <% include ../partials/head %>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/ngDialog.min.css">
+    <link rel="stylesheet" href="css/ngDialog-theme-default.min.css">
+
+    <!-- Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-scroll/0.7.2/angular-scroll.js"
+            ></script>
+    <script src="js/ngDialog.min.js"></script>
     <title>Better My City</title>
 
 </head>
 <body id="page-top" class="index">
-    
-<!-- Navigation -->
-<% include ../partials/nav %>
-<% include ../partials/navbar-animated %>
-    
-<!-- Header -->
-<header>
-    <div class="container">
-        <div class="intro-text">
-<!--            <div class="intro-heading">Welcome To Better My City!</div>-->
-            <div class="intro-lead-in">Seeking to make a positive impact on the neighborhoods around us</div>
-            <a du-smooth-scroll="tell-me-more" class="btn btn-xl">Tell Me More</a>
-            <a du-smooth-scroll="get-involved" class="btn btn-xl">How Do I Get Involved?</a>
+ 
+<!-- Main Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container" ng-controller="NavbarController">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" ui-sref="main">Better My City</a>
         </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- smooth-scroll and scroll-spy must be on li tag, not a tag, in order for 
+                    scroll-spy to work properly with css elements -->
+                <li class="hidden" du-smooth-scroll="page-top" du-scrollspy>
+                    <a></a>
+                </li>
+                <li du-scrollspy>
+                    <a ui-sref="whoWeAre">Who We Are</a>
+                </li>
+                <li du-scrollspy>
+                    <a ui-sref="findMyCity">Find My City</a>
+                </li>
+                <li du-scrollspy>
+                    <a ui-sref="contact">Contact Us</a>
+                </li>
+                <!--TODO add conditional states for login and signup vs portal/log out/profile-->
+                <li>
+                    <a ng-click="openLogin()" class="yellow">Log In</a>
+                </li>
+                <li>
+                    <a ng-click="openRegister()" class="yellow">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
-</header>
-    
-<!-- What We Do Section -->
-<section id="tell-me-more">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading">What We're Attempting</h2>
-                <h3 class="text-muted">Jeremiah 29:7</h3>
-                <h3 class="section-subheading text-muted">
-                But seek the welfare of the city where I have sent you into exile, and pray to the LORD on its behalf, for in its welfare you will find your welfare.
-                </h3>
-            </div>
-        </div>
-        <div class="row text-center">
-            <div class="col-md-6">
-                <img src="img/bible.png"/>
-                <h4 class="service-heading">Gospel-Centered Change</h4>
-                <p class="text-muted">We believe God placed us in the cities we live in for a purpose. Although we believe in a future glory that far outstrips this current world, we do not believe we are meant to neglect the welfare of this world. We believe we are meant to be positive agents of change in this world.</p>
-            </div>
-            <div class="col-md-6">
-                <img src="img/connecting.png"/>
-                <h4 class="service-heading">Connecting People</h4>
-                <p class="text-muted">We believe there are many in the community who also desire to be positive agents of change. However, often times those with the means to give are unaware of local causes that they believe in. We hope to connect philanthropic-minded organizations with local charities and causes to promote the well-being of cities.</p>
-            </div>
-        </div>
-    </div>
-</section>
-    
-<!--ng-view needed for where the templates go if i decide to use the router...-->
-<!--<ng-view></ng-view>-->
+    <!-- /.container-fluid -->
+</nav>
 
-<!-- Template -->
-    
-<!--
-<script type="text/ng-template" id="/todos.html">
-  Search: <input type="text" ng-model="search.name">
-  <ul>
-    <li ng-repeat="todo in todos | filter: search">
-      <input type="checkbox" ng-model="todo.completed">
-      <a href="#/{{$index}}">{{todo.name}}</a>
-    </li>
-  </ul>
-</script>
+<!--by including the app.js here, it will get auto-included in every html page -->
+<script src="js/app.js"></script>    
+<!-- services -->
+<script src="js/services/authentication.service.js"></script>
+<script src="js/services/flash.service.js"></script>
+<script src="js/services/user.service.js"></script>
+<!-- controllers -->
+<script src="js/controllers/navbarController.js"></script>
+<script src="js/controllers/userController.js"></script>
+<script src="js/controllers/cityController.js"></script>
 
-<script type="text/ng-template" id="/todoDetails.html">
-  <h1>{{ todo.name }}</h1>
-  completed: <input type="checkbox" ng-model="todo.completed">
-  note: <textarea>{{ todo.note }}</textarea>
-</script>
-
-<script>
-  angular.module('app', ['ngRoute', 'ui.bootstrap'])
-
-    //---------------
-    // Services
-    //---------------
-
-    .factory('Todos', function(){
-      return [
-        { name: 'AngularJS Directives', completed: true, note: 'add notes...' },
-        { name: 'Data binding', completed: true, note: 'add notes...' },
-        { name: '$scope', completed: true, note: 'add notes...' },
-        { name: 'Controllers and Modules', completed: true, note: 'add notes...' },
-        { name: 'Templates and routes', completed: true, note: 'add notes...' },
-        { name: 'Filters and Services', completed: false, note: 'add notes...' },
-        { name: 'Get started with Node/ExpressJS', completed: false, note: 'add notes...' },
-        { name: 'Setup MongoDB database', completed: false, note: 'add notes...' },
-        { name: 'Be awesome!', completed: false, note: 'add notes...' },
-      ];
-    })
-
-    //---------------
-    // Controllers
-    //---------------
-
-    .controller('TodoController', ['$scope', 'Todos', function ($scope, Todos) {
-      $scope.todos = Todos;
-    }])
-
-    .controller('TodoDetailCtrl', ['$scope', '$routeParams', 'Todos', function ($scope, $routeParams, Todos) {
-      $scope.todo = Todos[$routeParams.id];
-    }])
-
-    //---------------
-    // Routes
-    //---------------
-
-    .config(['$routeProvider', function ($routeProvider) {
-      $routeProvider
-        .when('/', {
-          templateUrl: '/todos.html',
-          controller: 'TodoController'
-        })
-
-        .when('/:id', {
-          templateUrl: '/todoDetails.html',
-          controller: 'TodoDetailCtrl'
-       });
-    }]);
-
-</script>
--->
+<!-- ui-router for SPA-->
+<div ui-view></div> 
 
 </body>
 </html>

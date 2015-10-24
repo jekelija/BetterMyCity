@@ -1,30 +1,18 @@
-<!-- for hooking this up to back end nodejs and mongo: http://adrianmejia.com/blog/2014/10/03/mean-stack-tutorial-mongodb-expressjs-angularjs-nodejs/ -->
-<html ng-app="app">
-<head>
-    <% include ../partials/head %>
-    
-    <title>Who We Are</title>
-
-</head>
-<body id="page-top" class="index">
-    
-<!-- Navigation -->
-<% include ../partials/nav %>
-<% include ../partials/navbar-animated %>
 
 <!-- Header -->
 <header>
     <div class="container">
         <div class="intro-text">
 <!--            <div class="intro-heading">Welcome To Better My City!</div>-->
-            <div class="intro-lead-in">About Us</div>
-            <a du-smooth-scroll="faq" class="btn btn-xl">FAQ</a>
+            <div class="intro-lead-in">Seeking to make a positive impact on the neighborhoods around us</div>
+            <a du-smooth-scroll="tell-me-more" class="btn btn-xl">Tell Me More</a>
+            <a du-smooth-scroll="get-involved" class="btn btn-xl">How Do I Get Involved?</a>
         </div>
     </div>
 </header>
     
 <!-- What We Do Section -->
-<section id="faq">
+<section id="tell-me-more">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -49,10 +37,3 @@
         </div>
     </div>
 </section>
-   
-<script>
-angular.module('about', [/*'ngRoute', */'ui.bootstrap', 'duScroll'])    
-</script>
-    
-</body>
-</html>
