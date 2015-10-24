@@ -20,8 +20,10 @@ app.factory('UserFactory', function($http){
                 },
                 //error
                 function(response) {
-                    //TODO this doesnt handle well
-                    throw 'Error: could not retrieve user from server'; 
+                    //TODO display dialog?
+                    console.log('Cannot go to portal until logging in');
+                    //redirect to main page
+                    $state.go('main');
                 }
             );
         };
@@ -36,7 +38,13 @@ app.factory('UserFactory', function($http){
 });
 
 //include that factory in the scope of the main controller
-app.controller('UserController', function($scope, $window, UserFactory){
-    $scope.user = new UserFactory($window.localStorage['username']);
+app.controller('UserController', function($scope, $window, $state, UserFactory, AuthenticationService){
+    if(AuthenticationService.isLoggedIn()) {
+        console.log('attempting log in');
+        $scope.user = new UserFactory($window.localStorage['username']);
+    }
+    else {
+        $state.go('main');
+    }
     
 });

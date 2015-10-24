@@ -16,24 +16,21 @@ function openLogin(ngDialog) {
 }
 
 //Login Controller-----------------------------------------------------------------------------
-app.controller('LoginController', function($scope, $window, $location, $timeout, ngDialog, AuthenticationService, FlashService){
+app.controller('LoginController', function($scope, $window, $state, $timeout, ngDialog, AuthenticationService, FlashService){
     (function initController() {
         $scope.dataLoading = false;
     })();
-    
+        
     $scope.login = function() {
         $scope.dataLoading = true;
         AuthenticationService.Login($scope.username, $scope.password, function (response) {
             if (response.data.success) {
                 $scope.dataLoading = false;
-                //store our jwt token in local storage
-                $window.localStorage['token'] = response.data.token;
-                $window.localStorage['username'] = $scope.username;
                 FlashService.Success('Login successful... Redirecting now', true);
                 $timeout(function() {
                     FlashService.clearFlashMessage();
                     ngDialog.close();
-                    $location.url('portal/' + $scope.username);
+                    $state.go('portal');
                 }, 1000);
             } else {
                 FlashService.Error(response.data.message);
@@ -49,8 +46,7 @@ app.controller('LoginController', function($scope, $window, $location, $timeout,
 });  
 
 //Register Controller-----------------------------------------------------------------------------
-app.controller('RegisterController', ['$scope', 'ngDialog', 'UserService', 'FlashService',
-function($scope, ngDialog, UserService, FlashService) {
+app.controller('RegisterController', function($scope, ngDialog, UserService, FlashService) {
     $scope.dataLoading = false;      
     
     $scope.register = function() {
@@ -71,15 +67,48 @@ function($scope, ngDialog, UserService, FlashService) {
         ngDialog.close();
         openLogin(ngDialog);
     };
-}]);
+});
 
 //NavBar Controller-----------------------------------------------------------------------------
-app.controller('NavbarController', ['$scope', '$timeout', 'ngDialog', function($scope, $timeout, ngDialog){
-    $scope.openRegister = function() {
-        openRegister(ngDialog);
+app.controller('NavbarController', function($scope, $timeout, $state, ngDialog, AuthenticationService){
+    $scope.getButton1Text = function() {
+        if(AuthenticationService.isLoggedIn()) {
+            return "My Profile";
+        }
+        else {
+            return "Log In";
+        }
+    }
+    
+    $scope.getButton2Text = function() {
+        if(AuthenticationService.isLoggedIn()) {
+            return "Log Out";
+        }
+        else {
+            return "Register";
+        }
+    }
+
+    $scope.button1 = function() {
+        if(AuthenticationService.isLoggedIn()) {
+            //TODO 
+            console.log('Edit profile...');
+        }
+        else {
+            openLogin(ngDialog);
+        }
     };
     
-    $scope.openLogin = function() {
-        openLogin(ngDialog);
+    $scope.button2 = function() {
+        if(AuthenticationService.isLoggedIn()) {
+            $timeout(function() {
+                $state.go('main');
+            }, 1000);
+            AuthenticationService.Logout();
+            
+        }
+        else {
+            openRegister(ngDialog);
+        }
     };
-}]);
+});
