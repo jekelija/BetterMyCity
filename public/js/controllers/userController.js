@@ -16,7 +16,7 @@ app.factory('UserFactory', function($http){
                 //success
                 function(response) {
                     //adds properties of response to the User object
-                    angular.extend(self, response.data);  
+                    angular.extend(self, response.data.user);  
                 },
                 //error
                 function(response) {
@@ -40,7 +40,6 @@ app.factory('UserFactory', function($http){
 //include that factory in the scope of the main controller
 app.controller('UserController', function($scope, $window, $state, UserFactory, AuthenticationService){
     if(AuthenticationService.isLoggedIn()) {
-        console.log('attempting log in');
         $scope.user = new UserFactory($window.localStorage['username']);
     }
     else {

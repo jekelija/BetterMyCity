@@ -107,7 +107,7 @@ router.use(function(req, res, next) {
 
 // route to get user information
 router.get('/:username', function(req, res) {
-    users.find({username:req.params.username}, function(err, user) {
+    users.findOne({username:req.params.username}, function(err, user) {
         if (err) {
             return res.json({ success: false, message: 'Failed to authenticate token.' });    
         }

@@ -16,6 +16,8 @@ var UserSchema = new mongoose.Schema({
     phone: String,
     address: String,
     cities: Array,
+    organizations_in: Array,
+    organizations_following: Array,
     privacyOptions: String,
     updated_at: { type: Date, default: Date.now }
 });

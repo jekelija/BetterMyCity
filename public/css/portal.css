@@ -1,0 +1,35 @@
+.portal-container {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.portal-org-list-container {
+	border-right: #cdcdcd medium solid;
+}
+
+.portal-org-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.portal-org-list-header {
+    text-align: center;
+    background: #fafafa linear-gradient(to bottom, #ffffff, #f2f2f2) repeat-x;
+    padding: 5px 0;
+    font-size: 20px;
+    font-weight: normal;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid #dddddd;
+    padding-top: 20px;
+}
+
+.portal-org-list-item {
+    color: #7c9eb2;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 20px;
+    line-height: 1.5em;
+    padding: 10px 1px;
+    display: block;
+}

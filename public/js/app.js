@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router', 'ui.bootstrap', 'duScroll', 'ngDialog']).value('duScrollOffset', 30);
+var app = angular.module('app', ['as.sortable', 'ui.router', 'ui.bootstrap', 'duScroll', 'ngDialog']).value('duScrollOffset', 30);
 
 //add state provider for SPA
 app.config(function($stateProvider, $urlRouterProvider) {
