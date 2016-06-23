@@ -91,8 +91,7 @@ app.controller('NavbarController', function($scope, $timeout, $state, ngDialog, 
 
     $scope.button1 = function() {
         if(AuthenticationService.isLoggedIn()) {
-            //TODO 
-            console.log('Edit profile...');
+            $state.go('portal');
         }
         else {
             openLogin(ngDialog);

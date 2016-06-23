@@ -9,7 +9,6 @@ app.controller('CityController', ['$scope', 'CityFactory', 'ngDialog', function(
 
     //attempt to retrieve the current cities from the DB
     CityFactory.success(function(data){
-        console.log(data);
         $scope.cities = data;
     }).error(function(data, status){
         console.log(data, status);

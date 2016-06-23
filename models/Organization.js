@@ -7,15 +7,16 @@
 var mongoose = require('mongoose');
 
 var OrganizationSchema = new mongoose.Schema({
-  name: String,
-  phone: String,
-  address: String,
-  poc: String,
-  pocPhone: String,
-  pocEmail: String,
-  availableItems: Array,
-  privacyOptions: String,
-  updated_at: { type: Date, default: Date.now }
+    name: String,
+    phone: String,
+    address: String,
+    image:String,
+    poc: String,
+    pocPhone: String,
+    pocEmail: String,
+    availableItems: Array,
+    privacyOptions: String,
+    updated_at: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Organization', OrganizationSchema);

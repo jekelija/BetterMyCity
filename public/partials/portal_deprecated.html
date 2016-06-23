@@ -1,0 +1,33 @@
+
+<!-- Main Portal Section; old portal attempt that had a sidebar -->
+<section id="portal" class="bg-light-gray">
+    <div class="portal-container container" ng-controller="UserController">
+        <!-- Stack the columns on mobile by making both full-width -->
+        <div class="full-height row">
+            <div class="full-height col-md-3" >
+                <!-- div inside column necessary for styling since bootstrap grid adds padding to col-* elements-->
+                <div class="full-height portal-org-list-container">
+                    <div class="portal-org-list-header">
+                    Following
+                    </div>
+                    <ul class="portal-org-list" data-as-sortable data-ng-model="user.organizations_following">
+                        <li data-ng-repeat="org in user.organizations_following" data-as-sortable-item>
+                            <!-- internal grid system to house text and draggable -->
+                            <div class="row">
+                                <div class="col-md-9" >
+                                    <span class="portal-org-list-item">{{org}}</span>
+                                </div>
+                                <!-- Only the handle is draggable -->
+                                <div class="col-md-3" data-as-sortable-item-handle>
+                                    <img src="img/draggable.png"/>
+                                </div>
+                            </div>
+                            
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-9">Main area...</div>
+        </div>
+    </div>
+</section>
