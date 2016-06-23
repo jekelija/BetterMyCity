@@ -37,7 +37,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             {
                 url:'/find-my-city',
                 templateUrl:'partials/find-my-city.html',
-                controller:'CityController'
+                controller:'FindMyCityController'
             }
         )
         .state('contact', 
@@ -51,6 +51,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 url:'/portal',
                 templateUrl:'partials/portal.html',
                 controller:'UserController'
+            }
+        )
+        .state('city', 
+            {
+                url:'/city',
+                params:{city:null}, //TODO how to pass in from URL?
+                templateUrl:'partials/city.html',
+                controller:'CityController'
             }
         )
     ;
