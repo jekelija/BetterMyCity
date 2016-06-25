@@ -8,15 +8,18 @@ app.factory('FindMyCityFactory', ['$http', function($http){
 app.controller('FindMyCityController', function($scope, $state, FindMyCityFactory, ngDialog){
 
     //attempt to retrieve the current cities from the DB
-    FindMyCityFactory.success(function(data){
-        $scope.cities = data;
-    }).error(function(data, status){
-        console.log(data, status);
-        $scope.cities = [];
-    });
+    FindMyCityFactory.then(
+        function successCallback(response) {
+            $scope.cities = response.data;
+        },
+        function errorCallback(response) {
+            $scope.cities = [];
+            $state.go('error', {errorText : "Error Code " + response.status + ": " + response.statusText});
+        }
+    );
 
     $scope.openCity = function(city) {
-        $state.go('city', {city : city});
+        $state.go('city', {cityId : city._id, city : city});
     };
 
     $scope.openAddCity = function() {

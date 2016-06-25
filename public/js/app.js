@@ -27,6 +27,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 templateUrl:'partials/main.html'
             }
         )
+        .state('error', 
+            {
+                url:'/error',
+                templateUrl:'partials/error.html',
+                //use Not a valid URL as default error text in case someone tries to navigate here directly
+                params:{errorText:"Not a valid URL"}, 
+                controller:'ErrorController'
+            }
+        )
         .state('whoWeAre', 
             {
                 url:'/who-we-are',
@@ -55,8 +64,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
         )
         .state('city', 
             {
-                url:'/city',
-                params:{city:null}, //TODO how to pass in from URL?
+                //need both city ID in url and city in params
+                //this allows us to do the following:
+                // 1) if we navigate directly from find-my-cities, we can just directly pass the city in, saving us a DB lookup
+                // 2) we always populate the unique city ID into the URL, so that if the user re-loads, since the city isnt cached, we just do a DB lookup
+                url:'/city/:cityId',
+                params:{city:null}, 
                 templateUrl:'partials/city.html',
                 controller:'CityController'
             }

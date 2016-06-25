@@ -9,12 +9,8 @@ var mongoose = require('mongoose');
 var CitySchema = new mongoose.Schema({
     name: String,
     image: {type: String, default:'img/default_city_image.jpg'},
-    admin: String,
-    adminPhone: String,
-    adminEmail: String,
-    updated_at: { type: Date, default: Date.now },
-    organizations: Array,
-    causes: Array
+    offers: Array,
+    requests: Array
 });
 
 module.exports = mongoose.model('City', CitySchema);

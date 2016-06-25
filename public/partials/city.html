@@ -1,36 +1,24 @@
 
-<!-- City Grid Section -->
+<!-- Search Current City Offers/Requests Section -->
 <section id="city" class="bg-light-gray">
     <div class="container">
         <div class="row" style="margin-top:20px;">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">Home</h2>
+                <h2 class="section-heading">{{city.name}}</h2>
             </div>
+        </div>
+         <div class="btn-group">
+            <label class="btn btn-primary" ng-model="mode" btn-radio="'Requests'">Requests</label>
+            <label class="btn btn-primary" ng-model="mode" btn-radio="'Offers'">Offers</label>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <div>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Browse Requests</button>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Browse Postings</button>
+            <div class="col-md-4 col-sm-6 city-item" ng-repeat="item in currentItems">
+                <div class="city-caption">
+                    <h4>{{item.subject}}</h4>
+                    <p class="text-muted">{{item.description_short}}</p>
+                    <p class="text-muted">Posted By: {{item.name}}</p>
                 </div>
             </div>
         </div>
-        <div class="row" style="margin-top:20px;">
-            <div class="col-md-6">
-                <div>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Browse Favorites</button>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div>
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Edit Profile</button>
-                </div>
-            </div>
-        </div>
-
     </div>
 </section>

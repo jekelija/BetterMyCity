@@ -113,7 +113,7 @@ router.get('/:username', function(req, res) {
         }
         else {
             //send user along
-            return res.json({ success: false, user:user });    
+            return res.json({ success: true, user:user });    
         }
     });
 });

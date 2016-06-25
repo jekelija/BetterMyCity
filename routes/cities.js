@@ -14,5 +14,21 @@ router.get('/', function(req, res, next) {
     });
 });
 
+// route to get user information
+router.get('/:cityId', function(req, res) {
+    cities.findOne({_id:req.params.cityId}, function(err, city) {
+        if (err) {
+            return res.json({ success: false, message: 'Error retrieving city information' });    
+        }
+        else if(city == null) {
+            return res.json({ success: false, message: 'Error finding city in database from ID provided' });    
+        }
+        else {
+            //send user along
+            return res.json({ success: true, city:city });    
+        }
+    });
+});
+
 module.exports = router;
 

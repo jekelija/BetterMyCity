@@ -52,7 +52,6 @@
                 <li du-scrollspy>
                     <a ui-sref="contact">Contact Us</a>
                 </li>
-                <!--TODO add conditional states for login and signup vs portal/log out/profile-->
                 <li>
                     <a ng-click="button1()" class="yellow">{{getButton1Text()}}</a>
                 </li>
@@ -77,9 +76,10 @@
 <script src="js/controllers/userController.js"></script>
 <script src="js/controllers/cityController.js"></script>
 <script src="js/controllers/findMyCityController.js"></script>
+<script src="js/controllers/errorController.js"></script>
 
 <!-- ui-router for SPA-->
-<div ui-view></div> 
+<div ui-view style="margin-top: 30px;"></div> 
 
 </body>
 </html>
