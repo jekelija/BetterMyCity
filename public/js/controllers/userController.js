@@ -20,10 +20,7 @@ app.factory('UserFactory', function($http){
                 },
                 //error
                 function(response) {
-                    //TODO display dialog?
-                    console.log('Cannot go to portal until logging in');
-                    //redirect to main page
-                    $state.go('main');
+                    $state.go('error', {errorText : "Error Fetching Username: " + username + " due to " + response.data.message});
                 }
             );
         };
@@ -43,7 +40,7 @@ app.controller('UserController', function($scope, $window, $state, UserFactory, 
         $scope.user = new UserFactory($window.localStorage['username']);
     }
     else {
-        $state.go('main');
+        $state.go('error', {errorText : "User portal page not accessible unless logged in"});
     }
     
 });

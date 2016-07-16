@@ -1,4 +1,4 @@
-app.controller('CityController', function($scope, $state, $stateParams, $http){
+app.controller('CityController', function($scope, $state, $stateParams, $http, AuthenticationService, ngDialog){
         
     if($stateParams.city == null) {
         $http.get('/cities/' + $stateParams.cityId).then(
@@ -24,6 +24,14 @@ app.controller('CityController', function($scope, $state, $stateParams, $http){
     }
     
     $scope.mode = 'Requests';
+    $scope.loggedIn = AuthenticationService.isLoggedIn();
+    $scope.openCreateDialog = function() {
+        ngDialog.open({
+            template: 'dialogs/createDialog.html',
+            controller: 'CreateController',
+            className: 'ngdialog-theme-default'
+        });
+    };
     
     //watch the mode (toggled by radio buttons)
     $scope.$watch('mode', function(value) {
