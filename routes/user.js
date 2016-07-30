@@ -5,12 +5,12 @@ var app = require('../app');
 
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
-var users = require('../models/User.js');
+var User = require('../models/User.js').User;
 
 // route to authenticate a user
 router.post('/authenticate', function(req, res) {
     // find the user
-    users.findOne({
+    User.findOne({
         username: req.body.username
     }, function(err, user) {
         if (err) throw err;
@@ -41,7 +41,7 @@ router.post('/authenticate', function(req, res) {
 // route to create a user
 router.post('/', function(req, res) {
     console.log('Adding ' + req.body);
-    var user = new users(
+    var user = new User(
         {
             username: req.body.username,
             password: req.body.password,
@@ -70,7 +70,7 @@ router.post('/', function(req, res) {
                 message: 'Successfully registered ' + req.body.username + '; please log in!'
             });
         }
-    })
+    });
     
 });
 
@@ -107,7 +107,7 @@ router.use(function(req, res, next) {
 
 // route to get user information
 router.get('/:username', function(req, res) {
-    users.findOne({username:req.params.username}, function(err, user) {
+    User.findOne({username:req.params.username}, function(err, user) {
         if (err) {
             return res.json({ success: false, message: 'Failed to authenticate token.' });    
         }

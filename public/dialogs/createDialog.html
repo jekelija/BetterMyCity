@@ -4,20 +4,20 @@
     <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
     <!--novalidate disables default html5 validation so we can do our own-->
     <form name="form" ng-submit="create()" role="form" novalidate> 
-        <div class="form-group" ng-class="{ 'has-error': form.username.$invalid && !form.username.$pristine }">
+        <div class="form-group" ng-class="{ 'has-error': form.type.$invalid && !form.type.$pristine }">
             <label for="type">Type</label> <br/>
             <div class="btn-group">
                 <label class="btn btn-primary" ng-model="type" btn-radio="'Requests'">Request</label>
                 <label class="btn btn-primary" ng-model="type" btn-radio="'Offers'">Offer</label>
             </div>
         </div>
-        <div class="form-group" ng-class="{ 'has-error': form.password.$invalid && !form.username.$pristine }">
+        <div class="form-group" ng-class="{ 'has-error': form.subject.$invalid && !form.subject.$pristine }">
             <label for="subject">Subject</label>
             <input type="text" name="subject" id="subject" class="form-control" ng-model="item.subject" required ng-maxlength="63"/>
             <span ng-show="form.password.$error.required && !form.password.$pristine" class="help-block">*Required</span>
             <span ng-show="form.password.$error.maxlength" class="help-block">Subject is too long</span>
         </div>
-        <div class="form-group" ng-class="{ 'has-error': form.password.$invalid && !form.username.$pristine }">
+        <div class="form-group" ng-class="{ 'has-error': form.description.$invalid && !form.description.$pristine }">
             <label for="subject">Description</label>
             <textarea rows="4" cols="64" name="description" id="description" class="form-control" ng-model="item.description" required ng-maxlength="255">
             </textarea>

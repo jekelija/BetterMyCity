@@ -10,7 +10,7 @@
             <span ng-show="form.username.$error.minlength" class="help-block">Username is too short</span>
             <span ng-show="form.username.$error.maxlength" class="help-block">Username is too long</span>
         </div>
-        <div class="form-group" ng-class="{ 'has-error': form.password.$invalid && !form.username.$pristine }">
+        <div class="form-group" ng-class="{ 'has-error': form.password.$invalid && !form.password.$pristine }">
             <label for="password">Password</label>
             <input type="password" name="password" id="password" class="form-control" ng-model="user.password" required ng-minlength="6" ng-maxlength="12"/>
             <span ng-show="form.password.$error.required && !form.password.$pristine" class="help-block">*Required</span>

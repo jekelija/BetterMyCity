@@ -6,17 +6,17 @@
         .factory('ItemService', function($http, $q, $timeout) {
             var service = {};
 
-            service.create = function(cityId, item, isRequest, callback) {
+            service.create = function(cityId, item, isOffer, callback) {
                 //user as a 'promise' that can halt a request
                 var deferred = $q.defer();
 
                 /* Create item on server in appropriate location */
                 var postUrl = "cities/" + cityId + "/";
-                if(isRequest) {
-                    postUrl += "requests";
+                if(isOffer) {
+                    postUrl += "offers";
                 }
                 else {
-                    postUrl += "offers";
+                    postUrl += "requests";
                 }
                 //use same function for success and error since success/error is in the response object
                 $http.post(postUrl, item, { timeout: deferred.promise }).then

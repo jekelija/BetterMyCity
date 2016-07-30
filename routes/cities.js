@@ -2,13 +2,15 @@
 var express = require('express');
 var router = express.Router();
 
-var items = require('../models/Item.js');
+var CityModel = require('../models/City.js');
+var Item = CityModel.Item;
+
 
 //CRUD below
 /* GET available cities */
-var cities = require('../models/City.js');
+var City = CityModel.City;
 router.get('/', function(req, res, next) {
-    cities.find(function (err, result) {
+    City.find(function (err, result) {
         if (err) {
             return next(err);
         }
@@ -18,16 +20,16 @@ router.get('/', function(req, res, next) {
 
 // route to get user information
 router.get('/:cityId', function(req, res) {
-    cities.findOne({_id:req.params.cityId}, function(err, city) {
+    City.findOne({_id:req.params.cityId}, function(err, city) {
         if (err) {
-            return res.json({ success: false, message: 'Error retrieving city information' });    
+            res.json({ success: false, message: 'Error retrieving city information' });    
         }
         else if(city == null) {
-            return res.json({ success: false, message: 'Error finding city in database from ID provided' });    
+            res.json({ success: false, message: 'Error finding city in database from ID provided' });    
         }
         else {
             //send user along
-            return res.json({ success: true, city:city });    
+            res.json({ success: true, city:city });    
         }
     });
 });
@@ -45,7 +47,7 @@ router.use(function(req, res, next) {
         // verifies secret and checks exp
         jwt.verify(token, app.get('tokenSecret'), function(err, decoded) {      
             if (err) {
-                return res.json({ success: false, message: 'Failed to authenticate token.' });    
+                res.json({ success: false, message: 'Failed to authenticate token.' });    
             } else {
                 // if everything is good, save to request for use in other routes
                 req.decoded = decoded;    
@@ -63,45 +65,57 @@ router.use(function(req, res, next) {
     }
 });
 
+function addFunction(cityId, subject, description, poster_id, isOffer, res) {
+    City.findOne({_id:cityId}, function(err, city) {
+        if (err) {
+            res.json({ success: false, message: 'Error retrieving city information' });    
+        }
+        else if(city == null) {
+            res.json({ success: false, message: 'Error finding city in database from ID provided' });    
+        }
+        else {
+            var newItem = new Item(
+                {
+                    subject: subject,
+                    description: description,
+                    poster_id: poster_id
+                }
+            );
+            if(isOffer) {
+                city.offers.push(newItem);
+            }
+            else {
+                city.requests.push(newItem);
+            }
+            city.save(function (err) {
+                if (err) {
+                    res.json({
+                        success: false,
+                        message: 'Cannot save new item ' + subject + ' to database... dont know why yet!'
+                    });
+                }
+                else {
+                    res.json({
+                        success: true,
+                        message: 'Successfully added ' + subject
+                    });
+                }
+            });
+        }
+    });
+}
+
 // route to create an offer on a city
-//router.post('/:cityId/offers', function(req, res) {
-//    console.log('Adding ' + req.body);
-//    cities.findOne({_id:req.params.cityId}, function(err, city) {
-//        if (err) {
-//            return res.json({ success: false, message: 'Error retrieving city information' });    
-//        }
-//        else if(city == null) {
-//            return res.json({ success: false, message: 'Error finding city in database from ID provided' });    
-//        }
-//        else {
-//              TODO this is where i left off... still need to provide username to req and actually post data from form
-//            city.offers.
-//        }
-//    });
-//    var item = new items(
-//        {
-//            subject: req.body.subject,
-//            description: req.body.description,
-//            poster_id: req.body.poster_id
-//        }
-//    );
-//   
-//    //save actually places it in DB
-//    item.save(function (err) {
-//        if (err) {
-//            res.json({
-//                success: false,
-//                message: 'Cannot save offer to database due to an unknown error'
-//            });
-//        }
-//        else {
-//            res.json({
-//                success: true,
-//                message: 'Successfully added new offer'
-//            });
-//        }
-//    })
-//});
+router.post('/:cityId/offers', function(req, res) {
+    console.log('Adding offer ' + req.body);
+    addFunction(req.params.cityId, req.body.subject, req.body.description, req.body.poster_id, true /*isOffer*/, res);
+});
+
+// route to create a request on a city
+router.post('/:cityId/requests', function(req, res) {
+    console.log('Adding request ' + req.body);
+    addFunction(req.params.cityId, req.body.subject, req.body.description, req.body.poster_id, false /*isOffer*/, res);
+});
 
 module.exports = router;
 
