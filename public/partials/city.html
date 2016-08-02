@@ -13,7 +13,7 @@
             <label class="btn btn-primary" ng-model="mode" btn-radio="'Offers'">Offers</label>
         </div>
         <!-- on right hand side, ability to create a new listing if logged in-->
-        <div style="float: right;" ng-if="loggedIn">
+        <div style="float: right;" ng-if="username">
             <button class="btn btn-default" ng-click="openCreateDialog()">
                 Create
             </button>
@@ -21,10 +21,24 @@
         <!-- underneath button, all the items-->
         <div style="margin-top:40px; clear: both;" class="row">
             <div class="col-md-4 col-sm-6 city-item" ng-repeat="item in currentItems">
-                <div class="city-caption">
+                <div class="city-caption" ng-mouseenter="showIcons=true" ng-mouseleave="showIcons=false">
                     <h4>{{item.subject}}</h4>
-                    <p class="text-muted">{{item.description_short}}</p>
+                    <p class="text-muted">{{item.description}}</p>
                     <p class="text-muted">Posted By: {{item.poster_id}}</p>
+                    <div class="row" ng-style="{'visibility': showIcons ? 'visible':'hidden'}">
+                        <!--blank div for spacing-->
+                        <div class="col-md-2"></div>
+                        <div class="col-md-3">
+                            <img ng-src="img/star_black.png" style="cursor:pointer" class="img-responsive" ng-click="favorite(item._id)" alt="">
+                        </div>
+                        <!--blank div for spacing-->
+                        <div class="col-md-2"></div>
+                        <div class="col-md-3">
+                            <img ng-src="img/reply.png" style="cursor:pointer" class="img-responsive" alt="">
+                        </div>
+                        <!--blank div for spacing-->
+                        <div class="col-md-2"></div>
+                    </div>
                 </div>
             </div>
         </div>

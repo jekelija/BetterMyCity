@@ -2,6 +2,10 @@
 var express = require('express');
 var router = express.Router();
 
+//must include app/jwt to deal with tokens
+var app = require('../app');
+var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
+
 var CityModel = require('../models/City.js');
 var Item = CityModel.Item;
 
@@ -97,7 +101,8 @@ function addFunction(cityId, subject, description, poster_id, isOffer, res) {
                 else {
                     res.json({
                         success: true,
-                        message: 'Successfully added ' + subject
+                        message: 'Successfully added ' + subject,
+                        city: city //return the updated city
                     });
                 }
             });

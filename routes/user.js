@@ -23,6 +23,7 @@ router.post('/authenticate', function(req, res) {
             } else {
                 // if user is found and password is right
                 // create a token
+                // TODO do not sign with the entire user, that gives them all info about themselves, which you dont necessarily want to do...
                 var token = jwt.sign(user, app.get('tokenSecret'), {
                     expiresInMinutes: 1440 // expires in 24 hours
                 });
@@ -106,16 +107,27 @@ router.use(function(req, res, next) {
 });
 
 // route to get user information
-router.get('/:username', function(req, res) {
-    User.findOne({username:req.params.username}, function(err, user) {
-        if (err) {
-            return res.json({ success: false, message: 'Failed to authenticate token.' });    
-        }
-        else {
-            //send user along
-            return res.json({ success: true, user:user });    
-        }
-    });
+router.get('/:username/favorites', function(req, res) {
+    console.log(req.decoded.username);
+    //somebody tried to get information about a user other than themselves!!
+    if(req.params.username != req.decoded.username) {
+        res.json({ success: false, message: 'Can only retrieve information about self; this hacking attempt will be noted.' });    
+    }
+    else {
+        User.findOne({username:req.params.username}, function(err, user) {
+            if (err) {
+                return res.json({ success: false, message: 'Failed to find user due to ' + err });    
+            }
+            else if(user == null) {
+                return res.json({ success: false, message: 'Failed to find username, it does not exist' });    
+            }
+            else {
+                //send favorites along
+                console.log(user);
+                return res.json({ success: true, data:user.favorites });    
+            }
+        });
+    }
 });
 
 

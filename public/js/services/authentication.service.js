@@ -57,6 +57,27 @@
             $window.localStorage.removeItem('token');
             $window.localStorage.removeItem('username');
         }
+        
+        //requires callback that take a response; response will have structure {success:bool, then data if success, or message if !success}
+        function GetUser(callback) {
+            var username = IsLoggedIn();
+            if(username) {
+                $http.get('/users/' + username, { timeout: deferred.promise }).then
+                    (function (response) {
+                        $timeout.cancel(reqTimeout);
+                        callback(response);
+                    }),
+                    (function (response) {
+                        $timeout.cancel(reqTimeout);
+                        callback(response);
+                    })
+                ;
+            }
+            else {
+                var response = {success : false, message : "No user logged in"};
+                callback(response);
+            }
+        }
     
     };
 
